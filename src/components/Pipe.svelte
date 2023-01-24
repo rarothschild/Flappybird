@@ -1,18 +1,23 @@
+
 <script lang="ts">
     import type { PipePair } from "./game";
     export let pipe: PipePair;
-</script>
-
-<style>
+  </script>
+  
+  <style>
     .pipe {
-        position: absolute;
-        background-color: palegreen;
+      position: absolute;
+      background-color: palegreen;
     }
-</style>
-
-{#if pipe.show}
-    <section style="left: {pipe.left}px; top: {pipe.topPipe.top}px; width {pipe.topPipe.width}px; height: {pipe.topPipe.height}px;"
-            class="top-pipe pipe"></section>
-    <section style="left: {pipe.left}px; top: {pipe.bottomPipe.top}px; width {pipe.bottomPipe.width}px; height: {pipe.bottomPipe.height}px;"
-            class="top-pipe pipe"></section>
-{/if}
+  </style>
+  
+  {#if pipe.show }
+  <section
+    style="left: {pipe.left}px; top: {pipe.topPipe.top}px; width: {pipe.width}px; height: {pipe.topPipe.height}px;"
+    class="top-pipe pipe"
+  ></section>
+  <section
+    style="left: {pipe.left}px; top: {pipe.bottomPipe.top}px; width: {pipe.width}px; height: {pipe.bottomPipe.height}px;"
+    class="top-bottom pipe"
+  ></section>
+  {/if}
