@@ -1,4 +1,7 @@
 export interface Frame {
+    firstPipe: PipePair;
+    secondPipe: PipePair;
+    // bird: Bird;
     gameOver: boolean;
     gameStarted: boolean;
     width: number;
@@ -17,6 +20,7 @@ export interface PipePair {
 export interface Pipe {
     top: number;
     height: number;
+    width: number;
 }
 
 export class GameController {
@@ -26,20 +30,49 @@ export class GameController {
         public readonly height = 800, 
         public readonly width = 400,
         public readonly pipeWidth = 50,
-        public readonly pipTop = 150,
+        public readonly pipeTop = 150,
         public readonly minTopForTopPipe = 70,
         public readonly maxTopForTopPipe = 350
     ) {}
 
     public newGame() {
+        let firstPipe = this.createPipe(true);
+        let secondPipe = this.createPipe(false);
+
         this.frame = {
+            firstPipe,
+            secondPipe,
             score: 0,
             width: this.width,
             height: this.height,
             gameOver: false,
             gameStarted:false,
-        }
+        };
         return this.frame;
     }
 
+    private randomYForTopPipe(): number {
+        return (
+            this.minTopForTopPipe +
+            (this.maxTopForTopPipe - this.minTopForTopPipe) * Math.random()
+        );
+    };
+
+    private createPipe(show: boolean): PipePair {
+        const height = this.randomYForTopPipe();
+
+        return {
+            topPipe: {
+                top: 0,
+                height,
+            },
+            bottomPipe: {
+                top: height + this.pipeWidth,
+                height: this.height,
+            },
+            left: this.width - this.pipeWidth,
+            width: this.pipeWidth,
+            show,
+        }
+    }
 }

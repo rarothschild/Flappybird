@@ -1,5 +1,6 @@
 <script lang="ts">
     import { GameController } from "../components/game"
+	import Pipe from "../components/Pipe.svelte";
     const game = new GameController();
     let frame = game.newGame();
 </script>
@@ -14,8 +15,9 @@ main {
 </style>
 
 <pre>
-{JSON.stringify(frame,null,2)}
+    {JSON.stringify(frame,null,2)}
 </pre>
 <main style="width: {frame.width}px; height: {frame.height}px;" class="game">
-
+    <Pipe pipe="{frame.firstPipe}" />
+    <Pipe pipe="{frame.secondPipe}" />
 </main>
